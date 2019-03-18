@@ -31,35 +31,25 @@ function solveSudoku(matrix) {
 
 matrixOpportunity(matrix);
 function matrixOpportunity(matrix) {
-console.log('matrix', matrix)
+  console.log('matrix', matrix);
 
-  let opp = matrix.slice();
-  let arrAll = [];
-  let minLengthArr = 1;
+  let allArr = [];
 
-  startOver:
-  for (let x = 0; x < opp.length; x++) {
-    for (let y = 0; y < opp[x].length; y++) {
-      if (opp[x][y] == 0) {
-        let arr = opportunity(opp, x, y);
-        console.log('arr', arr)
-        if (arr.length == minLengthArr) {
-          opp[x][y] = arr[0];
-          minLengthArr = 1;
-          break startOver;
-        }
+  for (let x = 0; x < matrix.length; x++) {
+    for (let y = 0; y < matrix[x].length; y++) {
+      if (matrix[x][y] == 0) {
+        let arr = opportunity(matrix, x, y);
+        console.log('arr', arr);
+        allArr.push(arr);
+      }
+      if (matrix[x][y] > 0) {
+        let value = matrix[x][y];
+        console.log('value', value);
+        allArr.push(value);
       }
     }
   }
-
-  // if (arr >= 1) {
-  //   minLengthArr++;
-  //   break startOver;
-  // }
-
-  // console.log('arrAll', arrAll.sort());
-  // console.log('matrixOpportunity', matrixOpportunity)
-
+        console.log('allArr', allArr);
 }
 
 
