@@ -34,23 +34,20 @@ function matrixOpportunity(matrix) {
   console.log('matrix', matrix);
 
 
-  let x = 4;
+  let x = 2;
   let y = 4;
 
   arrX = valuesRow(matrix, x);
   console.log('arrX', arrX);
   arrY = valuesColumn(matrix, y);
   console.log('arrY', arrY);
-
   arrBlock = valuesBlock(matrix, x, y);
   console.log('arrBlock', arrBlock);
-
-
 
 }
 
 function valuesRow(matrix, x) {
-  return matrix[x];
+  return matrix[x]; // arr X
 }
 
 function valuesColumn(matrix, y) {
@@ -59,14 +56,17 @@ function valuesColumn(matrix, y) {
   for (let x = 0; x < length; x++) {
     arr.push(matrix[x][y]);
   }
-  return arr;
+  return arr; // arr Y
 }
 
 function valuesBlock(matrix, x, y) {
-
-
-
-
-
-
+  const startX = (Math.floor(x / 3)) * 3; // 0 3 6
+  const startY = (Math.floor(y / 3)) * 3;
+  let arr = [];
+  for (let x = startX; x < startX + 3; x++) {
+    for (let y = startY; y < startY + 3; y++) {
+      arr.push(matrix[x][y]);
+    }
+  }
+  return arr; // arr Block
 }
