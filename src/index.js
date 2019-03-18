@@ -29,25 +29,46 @@ function solveSudoku(matrix) {
 
 }
 
-// matrixOpportunity(matrix);
+matrixOpportunity(matrix);
 function matrixOpportunity(matrix) {
-  console.log('matrix', matrix);
+console.log('matrix', matrix)
 
+  let opp = matrix.slice();
+  let arrAll = [];
+  let minLengthArr = 1;
 
+  startOver:
+  for (let x = 0; x < opp.length; x++) {
+    for (let y = 0; y < opp[x].length; y++) {
+      if (opp[x][y] == 0) {
+        let arr = opportunity(opp, x, y);
+        console.log('arr', arr)
+        if (arr.length == minLengthArr) {
+          opp[x][y] = arr[0];
+          minLengthArr = 1;
+          break startOver;
+        }
+      }
+    }
+  }
 
+  // if (arr >= 1) {
+  //   minLengthArr++;
+  //   break startOver;
+  // }
 
-
+  // console.log('arrAll', arrAll.sort());
+  // console.log('matrixOpportunity', matrixOpportunity)
 
 }
 
 
-opportunity(matrix, 2, 4);
+// opportunity(matrix, 2, 4);
 function opportunity(matrix, x, y) {
 
-  arrX = valuesRow(matrix, x);
-  arrY = valuesColumn(matrix, y);
-  arrBlock = valuesBlock(matrix, x, y);
-
+  const arrX = valuesRow(matrix, x);
+  const arrY = valuesColumn(matrix, y);
+  const arrBlock = valuesBlock(matrix, x, y);
   let arr = [...arrX, ...arrY, ...arrBlock];
   arr = unique(arr);
 
@@ -56,7 +77,7 @@ function opportunity(matrix, x, y) {
     opportunity.splice(opportunity.indexOf(arr[i]), 1);
   }
 
-  console.log('opportunity', opportunity)
+  // console.log('opportunity', opportunity)
   return opportunity; // [1] or [2, 3, 6] or ...
 }
 
