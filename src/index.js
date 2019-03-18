@@ -15,7 +15,7 @@ const matrix = [
 solveSudoku(matrix);
 
 
-
+const possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function solveSudoku(matrix) {
   // console.log('matrix', matrix);
@@ -29,21 +29,35 @@ function solveSudoku(matrix) {
 
 }
 
-matrixOpportunity(matrix);
+// matrixOpportunity(matrix);
 function matrixOpportunity(matrix) {
   console.log('matrix', matrix);
 
 
-  let x = 2;
-  let y = 4;
+
+
+
+
+}
+
+
+opportunity(matrix, 2, 4);
+function opportunity(matrix, x, y) {
 
   arrX = valuesRow(matrix, x);
-  console.log('arrX', arrX);
   arrY = valuesColumn(matrix, y);
-  console.log('arrY', arrY);
   arrBlock = valuesBlock(matrix, x, y);
-  console.log('arrBlock', arrBlock);
 
+  let arr = [...arrX, ...arrY, ...arrBlock];
+  arr = unique(arr);
+
+  let opportunity = possibleValues.slice();
+  for (let i = 0; i < arr.length; i++) {
+    opportunity.splice(opportunity.indexOf(arr[i]), 1);
+  }
+
+  console.log('opportunity', opportunity)
+  return opportunity; // [1] or [2, 3, 6] or ...
 }
 
 function valuesRow(matrix, x) {
@@ -70,3 +84,18 @@ function valuesBlock(matrix, x, y) {
   }
   return arr; // arr Block
 }
+
+function unique(arr) {
+  arr = arr.sort();
+  let arrNew = [];
+  let x;
+  for (const a of arr) {
+    if (a == 0) continue;
+    if (x == a) continue;
+    if (x != a) {
+      arrNew.push(a);
+      x = a;
+    }
+  }
+  return arrNew;
+};
