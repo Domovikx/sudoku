@@ -1,15 +1,15 @@
 
 
 const matrix = [
-  [1, 0, 5, 0, 9, 0, 0, 8, 0],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 4, 8, 0, 0, 0, 0],
-  [0, 3, 0, 0, 7, 4, 0, 1, 0],
-  [0, 4, 0, 0, 0, 0, 0, 9, 0],
-  [0, 2, 0, 5, 0, 0, 0, 0, 8],
-  [0, 0, 0, 7, 5, 0, 0, 2, 1],
-  [0, 0, 0, 8, 1, 0, 0, 6, 3],
-  [8, 0, 0, 0, 0, 3, 0, 0, 0]
+  [0, 5, 0, 4, 0, 0, 0, 1, 3],
+  [0, 2, 6, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 9, 0],
+  [0, 0, 0, 0, 8, 5, 6, 0, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 6, 0, 0, 0, 0],
+  [3, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 7, 3, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 5, 0, 0]
 ];
 
 solveSudoku(matrix);
@@ -31,25 +31,18 @@ function solveSudoku(matrix) {
 
 matrixOpportunity(matrix);
 function matrixOpportunity(matrix) {
-  console.log('matrix', matrix);
-
-  let allArr = [];
-
+  let arr = [];
   for (let x = 0; x < matrix.length; x++) {
     for (let y = 0; y < matrix[x].length; y++) {
       if (matrix[x][y] == 0) {
-        let arr = opportunity(matrix, x, y);
-        console.log('arr', arr);
-        allArr.push(arr);
-      }
-      if (matrix[x][y] > 0) {
-        let value = matrix[x][y];
-        console.log('value', value);
-        allArr.push(value);
+        let opp = opportunity(matrix, x, y); // [7, 8, 9]
+        let oppLength = opp.length;
+          arr.push({ oppLength, opp, x, y });
       }
     }
   }
-        console.log('allArr', allArr);
+console.log('arr :', arr);
+return arr; //(64) [{…},…]  //0: {oppLength: 3, opp: Array(3), x: 0, y: 0}
 }
 
 
