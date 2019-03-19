@@ -29,113 +29,112 @@ const possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // }
 
-// zxc();
-// function zxc() {
-
-//   for (let x = 0; x < matrix.length; x++) {
-//     for (let y = 0; y < matrix[x].length; y++) {
-//       if (matrix[x][y] == 0) {
-//         // console.log('x,y :', x,y);
-//       }
-//     }
-//   }
-
-//   let arr = matrixOpportunity(matrix);
-
-//   let min = {};
-//   min = minOppLenght(arr);
-//   console.log('min', min)
-
-//   let lengthOpp = oppLenghtAll(arr);
-
-// let asd = [];
-// for (const i of min.opp) {
-//   console.log('i', i)  
-//   matrix[min.x][min.y] = i;
-//   asd.push( oppLenghtAll(arr) );
-// }
-// console.log('asd', asd)
-
-
-// // console.log('min :', min);
-
-
-
-
-// }
-
-
-
-// function minOppLenght(arr) {
-//   let obj = {};
-//   for (const a of arr) {
-//     if (obj.oppLength == undefined) {
-//       obj = a;
-//     }
-//     if (obj.oppLength > a.oppLength) {
-//       obj = a;
-//     }
-//   }
-//   // console.log('obj', obj);
-//   return obj;
-// }
-
-// function oppLenghtAll(arr) {
-//   let count = 0;
-//   for (const a of arr) {
-//     count += a.oppLength;
-//   }
-//   // console.log('count', count);
-//   return count;
-// }
 
 
 
 
 
-
-
-
-
-
-asd()
-function asd() {
-  
-let matrix2 = copyArr(matrix);
-matrix2[0][0] = 5;
-let matrix3 = copyArr(matrix);
-matrix3[0][0] = 6;
-
-console.log('matrix', matrix)
-console.log('matrix2', matrix2)
-console.log('matrix3', matrix3)
-
-}
-
-
-
-function copyArr(arr) {
-  let arrNew = [];
-  for (const m of arr) {
-    arrNew.push(m.slice());
+function minOppLenght(arr) {
+  let obj = {};
+  for (const a of arr) {
+    if (obj.oppLength == undefined) {
+      obj = a;
+    }
+    if (obj.oppLength > a.oppLength) {
+      obj = a;
+    }
   }
-  return arrNew;
+  // console.log('obj', obj);
+  return obj;
+}
+
+function oppLenghtAll(arr) {
+  let count = 0;
+  for (const a of arr) {
+    count += a.oppLength;
+  }
+  // console.log('count', count);
+  return count;
+}
+
+findZeros(matrix)
+function findZeros(matrix) {
+  for (let x = 0; x < matrix.length; x++) {
+    for (let y = 0; y < matrix[x].length; y++) {
+      if (matrix[x][y] == 0) {
+        console.log('x,y :', x, y);
+        // return;
+        while (matrix[x][y] == 0) {
+          let obj = findOptions(matrix);
+          // console.log('obj', obj);
+          matrix[obj.x][obj.y] = obj.number;
+          console.log('matrix', matrix);
+
+        }
+      }
+    }
+  }
 }
 
 
-matrixOpportunity(matrix);
+findOptions(matrix);
+function findOptions(matrix) {
+
+  let arr = matrixOpportunity(matrix);
+
+  let min = {};
+  min = minOppLenght(arr);
+  // console.log('min', min);
+
+  // console.log('matrix', matrix);
+
+  let obj = {};
+  for (const i of min.opp) {
+    // console.log('i', i)
+    let matrixCheck = copyArr(matrix);
+
+    matrixCheck[min.x][min.y] = i;
+    console.log('matrixCheck', matrixCheck);
+
+    arr = matrixOpportunity(matrixCheck);
+    console.log('arr', arr)
+    amountOfOptions = oppLenghtAll(arr);
+    
+    if (obj.amountOfOptions == undefined) {
+      obj.amountOfOptions = amountOfOptions;
+      obj.number = i;
+      obj.x = min.x;
+      obj.y = min.y;
+    }
+    if (obj.amountOfOptions < amountOfOptions) {
+      obj.amountOfOptions = amountOfOptions;
+      obj.number = i;
+      obj.x = min.x;
+      obj.y = min.y;
+    }
+
+  }
+  console.log('obj', obj);
+  return obj;
+}
+
+
+
+
+
+// matrixOpportunity(matrix);
 function matrixOpportunity(matrix) {
   let arr = [];
   for (let x = 0; x < matrix.length; x++) {
     for (let y = 0; y < matrix[x].length; y++) {
       if (matrix[x][y] == 0) {
         let opp = opportunity(matrix, x, y); // [7, 8, 9]
-        // let oppLength = opp.length;
-        arr.push({ opp, x, y });
+        let oppLength = opp.length;
+        arr.push({ oppLength, opp, x, y });
       }
     }
   }
-  console.log('arr :', arr);
+  // console.log('arr :', arr);
   return arr; //(64) [{…},…]  //0: {oppLength: 3, opp: Array(3), x: 0, y: 0}
 }
 
@@ -196,4 +195,12 @@ function unique(arr) {
     }
   }
   return arrNew;
-};
+}
+
+function copyArr(arr) {
+  let arrNew = [];
+  for (const m of arr) {
+    arrNew.push(m.slice());
+  }
+  return arrNew;
+}
