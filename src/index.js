@@ -12,22 +12,116 @@ const matrix = [
   [0, 0, 0, 0, 0, 0, 5, 0, 0]
 ];
 
-solveSudoku(matrix);
+// solveSudoku(matrix);
 
 
 const possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function solveSudoku(matrix) {
-  // console.log('matrix', matrix);
-  // module.exports = function solveSudoku(matrix) {
+// function solveSudoku(matrix) {
+//   // console.log('matrix', matrix);
+//   // module.exports = function solveSudoku(matrix) {
 
-  // 
-
-
+//   // 
 
 
+
+
+
+// }
+
+// zxc();
+// function zxc() {
+
+//   for (let x = 0; x < matrix.length; x++) {
+//     for (let y = 0; y < matrix[x].length; y++) {
+//       if (matrix[x][y] == 0) {
+//         // console.log('x,y :', x,y);
+//       }
+//     }
+//   }
+
+//   let arr = matrixOpportunity(matrix);
+
+//   let min = {};
+//   min = minOppLenght(arr);
+//   console.log('min', min)
+
+//   let lengthOpp = oppLenghtAll(arr);
+
+// let asd = [];
+// for (const i of min.opp) {
+//   console.log('i', i)  
+//   matrix[min.x][min.y] = i;
+//   asd.push( oppLenghtAll(arr) );
+// }
+// console.log('asd', asd)
+
+
+// // console.log('min :', min);
+
+
+
+
+// }
+
+
+
+// function minOppLenght(arr) {
+//   let obj = {};
+//   for (const a of arr) {
+//     if (obj.oppLength == undefined) {
+//       obj = a;
+//     }
+//     if (obj.oppLength > a.oppLength) {
+//       obj = a;
+//     }
+//   }
+//   // console.log('obj', obj);
+//   return obj;
+// }
+
+// function oppLenghtAll(arr) {
+//   let count = 0;
+//   for (const a of arr) {
+//     count += a.oppLength;
+//   }
+//   // console.log('count', count);
+//   return count;
+// }
+
+
+
+
+
+
+
+
+
+
+asd()
+function asd() {
+  
+let matrix2 = copyArr(matrix);
+matrix2[0][0] = 5;
+let matrix3 = copyArr(matrix);
+matrix3[0][0] = 6;
+
+console.log('matrix', matrix)
+console.log('matrix2', matrix2)
+console.log('matrix3', matrix3)
 
 }
+
+
+
+function copyArr(arr) {
+  let arrNew = [];
+  for (const m of arr) {
+    arrNew.push(m.slice());
+  }
+  return arrNew;
+}
+
 
 matrixOpportunity(matrix);
 function matrixOpportunity(matrix) {
@@ -36,13 +130,13 @@ function matrixOpportunity(matrix) {
     for (let y = 0; y < matrix[x].length; y++) {
       if (matrix[x][y] == 0) {
         let opp = opportunity(matrix, x, y); // [7, 8, 9]
-        let oppLength = opp.length;
-          arr.push({ oppLength, opp, x, y });
+        // let oppLength = opp.length;
+        arr.push({ opp, x, y });
       }
     }
   }
-console.log('arr :', arr);
-return arr; //(64) [{…},…]  //0: {oppLength: 3, opp: Array(3), x: 0, y: 0}
+  console.log('arr :', arr);
+  return arr; //(64) [{…},…]  //0: {oppLength: 3, opp: Array(3), x: 0, y: 0}
 }
 
 
